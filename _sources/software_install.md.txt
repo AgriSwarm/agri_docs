@@ -1,13 +1,17 @@
-# Install Software
+# Software System
 
-## Xavier NXのフラッシュ
+ドローンの通信システムは以下のように構成されています。
+![comm_system](_static/comm_system.png)
 
-Jetson Xavier NXのフラッシュには2通りある
-1. pc(host)でmicroSDをフラッシュ(balenaEtcher / [Jetpack5.0.2](https://developer.nvidia.com/embedded/jetpack-sdk-502)) ⇒ xavierに刺してboot
-2. pc(host)に[Jetpack SDK Manager](https://developer.nvidia.com/sdk-manager)を入れる ⇒ xavierをリカバリーモードで起動しusb経由でflash
+ドローンの通信には大きく分けて2つのモードがあります。
 
-基本2が安全だがmicroSDによってはうまくできないこともあるのでそのときは使い分ける。
+**1. シングルエージェントモード**
 
-## Setup スクリプトの実行
+単機での通信を行うモードでは、ルーターを介さずにJetsonをアクセスポイントかつROSマスターとして動作させ、laptopをWiFiでJetsonに接続します。この場合システムがインターネットを利用できなくなることに注意してください。
+![comm_system](_static/comm_system_single.png)
 
-各モジュールの動作に伴う種々のセットアップを行うためのスクリプトを実行する。
+**2. マルチエージェントモード(未実装)**
+
+複数機での通信を行うモードでは、Jetsonをクライアントとしてルーターに接続し、laptopもルーターに接続します。この場合システムがインターネットを利用できるため、ROSパッケージのダウンロードやアップデートが可能です。
+
+![comm_system](_static/comm_system_multi.png)
