@@ -13,6 +13,7 @@ Agri Swarm Build Guide
    :caption: Getting Started
    :hidden:
 
+   guide
    main
 
 .. toctree::
@@ -29,7 +30,24 @@ Agri Swarm Build Guide
    :hidden:
 
    software_install
+   serv_soft_install
+   quad_soft_install
    setup_realsense
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Calibration
+   :hidden:
+
+   vins_calib
+   ap_calib
+
+.. toctree::
+   :maxdepth: 2
+   :caption: For Developers
+   :hidden:
+
+   algo_system
 
 前提環境
 --------
