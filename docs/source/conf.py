@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'agri_docs'
-copyright = '2024, Tomoki Arita'
-author = 'Tomoki Arita'
+copyright = '2024, Tomoki Arita & Yuiga Wada (AgriSwarm)'
+author = 'Tomoki Arita & Yuiga Wada (AgriSwarm)'
 
 # The full version, including alpha/beta/rc tags
 release = '1.0.0'
