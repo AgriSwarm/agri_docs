@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
@@ -5,19 +7,15 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Agri Swarm Build Guide &mdash; agri_docs 1.0.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=8d563738"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -50,7 +48,6 @@
 <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="guide.html">はじめに</a></li>
-<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Build Hardware</span></p>
 <ul>
@@ -68,6 +65,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="vins_calib.html">SLAMシステムのキャリブレーション</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ap_calib.html">Ardupilotのキャリブレーション</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="detector.html">花の物体検出器</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pose_estimate.html">花の姿勢推定モデル</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">For Developers</span></p>
 <ul>
@@ -112,8 +114,31 @@
 </div>
 <div class="toctree-wrapper compound">
 </div>
+<div class="toctree-wrapper compound">
+</div>
 <section id="id1">
-<h2>前提環境<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<h2>本プロジェクトについて<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>地理的条件が悪く斜面地が多い「中山間地域」に特化したロボット開発は、技術的困難を伴うため、未だ実用化に及んでいない。一方、受粉や農薬散布だけを目的としたロボットシステムにはいくつかの前例が存在する。しかしこれらはいずれも自己位置推定と環境地図作成に関して高度に整備された屋内環境（ハウス栽培）を想定しており、屋外の不整地環境においては適用が難しい。また、ほとんどの既存事例は大型ドローンを想定しており、棚を利用した果樹園において、棚の下側から散布を行う作業にとっては最適ではない。</p>
+<p>上記を踏まえ本プロジェクトでは、中山間地域での使用を想定した、高度な農作業を代替する小型自律ドローン群システムを開発する。本プロジェクトの目標は、不整地環境における果樹の棚下からの人手による受粉作業を、小型自律ドローン群によって代替することである。</p>
+<p>本システムでは、「モーションキャプチャ等を用いずに、カメラ画像のみから自己位置推定を行う手法（Visual Inertial Odometry）」「機械学習に基づき花の姿勢を認識する画像認識技術」「草木や果樹棚、他ドローンとの衝突を避けながらドローンを群制御する制御プランナ」等により、未知の不整地環境でも作業を可能にする。さらに、棚下に潜り込んで、葉面や花弁に対する直接的な散布を行うことができる機体も開発する。</p>
+<p>本システムが農業従事者にとって低コストで逐次投入可能な農業支援ロボットとなることで、高齢化が進んでいる一次産業を自動化によって支援し、中山間地域や果樹園等の不整地における農業の生産性と持続可能性を大きく向上させることが期待できる。</p>
+<p><a class="reference external" href="https://www.ipa.go.jp/jinzai/mitou/it/2024/gaiyou-oc-1.html">未踏IT人材発掘・育成事業：2024年度採択プロジェクト概要（有田・和田PJ）</a></p>
+</section>
+<section id="id2">
+<h2>開発者<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<ul>
+<li><a class="reference internal image-reference" href="https://pbs.twimg.com/profile_images/1798038835533918209/yRZvN61T_400x400.jpg"><img alt="Tomoki Arita" src="https://pbs.twimg.com/profile_images/1798038835533918209/yRZvN61T_400x400.jpg" style="width: 60px; height: 60px;" />
+</a>
+<p><a class="reference external" href="https://x.com/allegory_write">有田朋樹（Tomoki Arita）</a></p>
+</li>
+<li><a class="reference internal image-reference" href="https://yuiga.dev/images/icon.png"><img alt="Yuiga Wada" src="https://yuiga.dev/images/icon.png" style="width: 60px; height: 60px;" />
+</a>
+<p><a class="reference external" href="https://yuiga.dev">和田唯我（Yuiga Wada）</a></p>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h2>前提環境<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
 <p>ドローン本体とは別に、以下環境を用意したPCが必要です。</p>
 <table class="docutils align-default">
 <thead>
